@@ -31,12 +31,18 @@ class NotificationSystem {
 
   unsubscribe(topicId, subscriberId) {
     if (this.topics[topicId]) {
-      this.topics[topicId].delete(subscriberId);
-      console.log(`Subscriber ${subscriberId} unsubscribed from topic ${topicId}`);
-      if (this.topics[topicId].size === 0) {
-        delete this.topics[topicId]; // Clean up the topic if no subscribers left
+      if (this.topics[topicId].has(subscriberId)) {
+        this.topics[topicId].delete(subscriberId);
+        console.log(`Subscriber ${subscriberId} unsubscribed from topic ${topicId}`);
+        if (this.topics[topicId].size === 0) {
+          delete this.topics[topicId]; // Clean up the topic if no subscribers left
+        }
+        this.printState();
+      } else {
+        console.log(`Subscriber ${subscriberId} is not subscribed to topic ${topicId}`);
       }
-      this.printState();
+    } else {
+      console.log(`Topic ${topicId} does not exist`);
     }
   }
 
@@ -57,8 +63,12 @@ app.use(express.json());
 
 app.post('/subscribe', (req, res) => {
   const { topicId, subscriberId } = req.body;
-  notificationSystem.subscribe(topicId, subscriberId);
-  res.send(`${subscriberId} subscribed to ${topicId}`);
+  if (notificationSystem.topics[topicId] && notificationSystem.topics[topicId].has(subscriberId)) {
+    res.send(`Subscriber ${subscriberId} is already subscribed to topic ${topicId}`);
+  } else {
+    notificationSystem.subscribe(topicId, subscriberId);
+    res.send(`${subscriberId} subscribed to ${topicId}`);
+  }
 });
 
 app.post('/notify', (req, res) => {
@@ -69,8 +79,19 @@ app.post('/notify', (req, res) => {
 
 app.post('/unsubscribe', (req, res) => {
   const { topicId, subscriberId } = req.body;
-  notificationSystem.unsubscribe(topicId, subscriberId);
-  res.send(`${subscriberId} unsubscribed from ${topicId}`);
+  if (notificationSystem.topics[topicId]) {
+    if (notificationSystem.topics[topicId].has(subscriberId)) {
+      notificationSystem.topics[topicId].delete(subscriberId);
+      if (notificationSystem.topics[topicId].size === 0) {
+        delete notificationSystem.topics[topicId];
+      }
+      res.send(`Subscriber ${subscriberId} unsubscribed from topic ${topicId}`);
+    } else {
+      res.send(`Subscriber ${subscriberId} is not subscribed to topic ${topicId}`);
+    }
+  } else {
+    res.send(`Topic ${topicId} does not exist`);
+  }
 });
 
 app.get('/printState', (req, res) => {
