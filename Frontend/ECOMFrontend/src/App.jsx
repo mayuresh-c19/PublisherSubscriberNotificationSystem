@@ -7,7 +7,7 @@ function App() {
   const [message, setMessage] = useState('');
 
   const handleSubscribe = async () => {
-    const response = await fetch('http://localhost:3000/subscribe', {
+    const response = await fetch('https://publishersubscribernotificationsystem.onrender.com/subscribe', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -19,7 +19,7 @@ function App() {
   };
 
   const handleNotify = async () => {
-    const response = await fetch('http://localhost:3000/notify', {
+    const response = await fetch('https://publishersubscribernotificationsystem.onrender.com/notify', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ function App() {
   };
 
   const handleUnsubscribe = async () => {
-    const response = await fetch('http://localhost:3000/unsubscribe', {
+    const response = await fetch('https://publishersubscribernotificationsystem.onrender.com/unsubscribe', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ function App() {
   const [stateData, setStateData] = useState('');
 
   const handlePrintState = async () => {
-    const response = await fetch('http://localhost:3000/printState');
+    const response = await fetch('https://publishersubscribernotificationsystem.onrender.com/printState');
     const data = await response.json();
   
     let formattedData = 'Current state of topics:\n';
