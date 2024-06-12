@@ -56,7 +56,7 @@ The project consists of a simple Publisher-Subscriber Notification System. The b
 - **Node.js**: Make sure Node.js is installed on your system.
 - **npm**: Node package manager to install dependencies.
 
-### Steps to Run the Backend
+### Steps to Run the Backend and Frontend
 
 1. Navigate to the `Backend` folder:
    ```
@@ -82,4 +82,4 @@ The frontend development server will start, and you can access the application a
 
 The Current State API is created for the sake of understanding how the current state of the website is looking.
 
-# The Data Structures Used for this Site are Array for Storing Topics and Set for Storing Subscribers to avoid Duplication :)
+### The Data Structures Used for this Site are Array for Storing Topics and Set for Storing Subscribers to avoid Duplication :)
