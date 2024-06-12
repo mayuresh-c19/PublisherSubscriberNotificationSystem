@@ -6,6 +6,10 @@ This project implements a Publisher-Subscriber Notification System using Node.js
 
 For detailed API documentation, please refer to the [Postman API Documentation](https://documenter.getpostman.com/view/30851421/2sA3XPBhNg).
 
+### Postman Collection Link
+
+``` https://www.postman.com/mayureshc19/workspace/public-workspace/collection/30851421-a70c1015-4980-43c9-9fb0-f56ebb7bee63?action=share&creator=30851421 ```
+
 ## Project Explanation
 
 The project consists of a simple Publisher-Subscriber Notification System. The backend handles the subscription, notification, and unsubscription of topics by subscribers. The frontend allows users to interact with this system via a simple web interface.
